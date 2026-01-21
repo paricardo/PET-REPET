@@ -14,7 +14,7 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 764px) {
+@media (max-width: 767px) {
   /* Estilos exclusivos para celular */
 
 html, body {
