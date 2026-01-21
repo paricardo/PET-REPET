@@ -1,4 +1,5 @@
 :root {
+    --cinza: #e5e5e5;
     --vermelho: #fb1909;
     --verde: #63bf53;
     --dourado: #fdd73c;
@@ -30,7 +31,7 @@ header {
     width: 100%;
     height: 70px;
 
-    background-color: #070376;
+    background-image: linear-gradient(to bottom, var(--azul1), var(--azul2), var(--azul3));
 
     display: flex;
     justify-content: space-between;
@@ -169,4 +170,149 @@ section, .conatiner {
     background-color: var(--vermelho);
 }
 
+}
+
+
+@media (min-width: 1024px) {
+
+    html, body {
+        overflow-x: hidden;
+        background-color: var(--cinza);
+    }
+
+    /* HEADER */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        display: flex;
+
+
+        width: 100%;
+        height: 70px;
+
+        background-image: linear-gradient(
+            to bottom,
+            var(--azul1),
+            var(--azul2),
+            var(--azul3)
+        );
+
+        display: flex;
+        justify-content: center; /* centraliza o container */
+        align-items: center;
+
+        z-index: 1000;
+    }
+
+    /* Container interno do header */
+    .header--container {
+        max-width: 1280px;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 32px;
+    }
+
+    .header--esq {
+        height: 100%;
+        width: 100%; 
+        max-width: 567px;       
+        display: flex;
+        align-items: center;
+    }
+
+    .img--logo {
+        height: 130px;
+    }
+
+    .header--dir {
+        height: 100%;
+        width: 100%;
+        max-width: 567px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+    }
+
+    .img--user {
+        height: 60px;
+    }
+
+    .nameUser {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    /* NAV */
+    nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+        height: 70px;
+
+        background-color: var(--azul3);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        z-index: 999;
+    }
+
+    nav ul {
+        max-width: 1280px;
+        width: 100%;
+
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+    }
+
+    nav ul li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    nav ul a img {
+        height: 42px;
+        background-color: var(--azul0);
+        border-radius: 8px;
+        padding: 8px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    nav ul a img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px var(--azul0);
+    }
+
+    main {
+        margin-top: 140px; /* 70 header + 70 nav */
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: 1280px;
+        width: 100%;
+
+        min-height: calc(100vh - 140px);
+
+        background-color: #ffffff;
+
+        padding: 32px;
+        border-radius: 12px;
+
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
 }
