@@ -1,0 +1,31 @@
+@media (max-width: 600px) {
+
+    .title-login {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .text-link {
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    body {
+        padding-bottom: 70px;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        padding: 10px;
+        z-index: 1000;
+    }
+}
