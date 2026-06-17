@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    <title>Serviços</title>
+    <title>Clientes</title>
 </head>
 <body>
     <main class="container">
         <div class="mt-3 p-1">
-            <h1>Serviços</h1>
+            <h1>Clientes</h1>
         </div>
 
         <div>
             <form>
                 <div class="mb-3 mt-3">
-                    <input class="input-search" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="&#128269 Buscar por nome">
+                    <input class="input-search" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="&#128269 Buscar por nome ou telefone">
                 </div>
                 
-                <button type="submit" class="btn btn-primary w-100">+ Novo Serviço</button>
+                <button type="submit" class="btn btn-primary w-100">+ Novo Cliente</button>
             </form>
         </div>
 
-        <div class="card-info-pets d-flex justify-content-around p-3 gap-3 rounded mt-4">
-            <div class="d-flex justify-content-center align-items-center">
-                <img class="img-pet-service" src="../static/icons-services/tomando-banho.png" alt="photo-pet">
+        <div class="card-list">
+            <div class="card-list-img">
+                <img class="img-card-info-client" src="../static/icons/usuario.png" alt="photo-pet">
             </div>
 
-            <div class="car-info-pets-list Info flex-grow-1">
-                <h4 class="m-0 pt-2">Banho</h4>
-                <p class="m-0">Higiene completa do pet</p>
-                <p class="m-0">P: R$60 -> M: R$80 -> P: R$100</p>
+            <div class="card-list-info">
+                <h4>Carlos Silva</h4>
+                <p class="p-0 m-0">(11) 99268-7766</p>
+                <p class="p-0 m-0">São Paulo - SP</p>
+                <p class="p-0 m-0">2 pets</p>
             </div>
 
-            <div class="d-flex justify-content-center align-items-center">
-                <button class="border-0 bg-white">
-                    <img class="icons-header-w bg-white" src="../static/icons/edit_pencil.svg" alt="edit">
-                </button>
+            <div class="card-list-status">
+                <p class="status-green">Ativo</p>
             </div>
         </div>
 
     </main>
 
-    <nav class="navbar d-block d-md-none fixed-bottom bg-body-tertiary border-top">
+
+    <nav class="bg-light navbar d-block d-md-none fixed-bottom bg-body-tertiary border-top">
         <div class="container-fluid">
             
             <span class="d-flex flex-column align-items-center">
@@ -81,8 +81,6 @@
         </div>
     </nav>
 
-
-
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
