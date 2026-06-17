@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Clientes</title>
+</head>
+<body>
+    <main class="container">
+        <div class="mt-3 p-1">
+            <h1>Clientes</h1>
+        </div>
+
+        <div>
+            <form>
+                <div class="mb-3 mt-3">
+                    <input class="input-search" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="&#128269 Buscar por nome ou telefone">
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">+ Novo Cliente</button>
+            </form>
+        </div>
+
+        <div class="card-list">
+            <div class="card-list-img">
+                <img class="img-card-info-client" src="../static/icons/usuario.png" alt="photo-pet">
+            </div>
+
+            <div class="card-list-info">
+                <h4>Carlos Silva</h4>
+                <p class="p-0 m-0">(11) 99268-7766</p>
+                <p class="p-0 m-0">São Paulo - SP</p>
+                <p class="p-0 m-0">2 pets</p>
+            </div>
+
+            <div class="card-list-status">
+                <p class="status-green">Ativo</p>
+            </div>
+        </div>
+
+    </main>
+
+
+    <nav class="bg-light navbar d-block d-md-none fixed-bottom bg-body-tertiary border-top">
+        <div class="container-fluid">
+            
+            <span class="d-flex flex-column align-items-center">
+                <img src="../static/icons/home.svg" alt="home">
+                <a class="text-nav navbar-brand m-0" href="#">Home</a>
+            </span>
+
+            <span class="d-flex flex-column align-items-center">
+                <img src="../static/icons/group.svg" alt="home">
+                <a class="text-nav navbar-brand m-0" href="#">Clientes</a>
+            </span>
+
+            <span class="d-flex flex-column align-items-center">
+                <img src="../static/icons/calendar.svg" alt="home">
+                <a class="text-nav navbar-brand m-0" href="#">Atendimentos</a>
+            </span>
+
+            <span class="d-flex flex-column align-items-center">
+                <img src="../static/icons/money.svg" alt="home">
+                <a class="text-nav navbar-brand m-0" href="#">Financeiro</a>
+            </span>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+
+                <span class="d-flex align-items-center">
+                    <img src="../static/icons/person.svg" alt="home">
+                    <a class="text-nav navbar-brand m-0 p-2 fs-5" href="#">Usuários</a>
+                </span>
+           
+            </div>
+        </div>
+    </nav>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

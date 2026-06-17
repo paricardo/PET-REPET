@@ -1,31 +1,469 @@
-@media (max-width: 600px) {
 
-    .title-login {
-        font-size: 18px;
+/*SYSTEM DEFAULTS*/
+
+body {
+    padding-bottom: 70px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+/* STYLE CRUD */
+
+    label {
+        font-size: 15px;
         font-weight: bold;
-        margin-bottom: 10px;
     }
 
-    .text-link {
-        text-decoration: none;
-        font-size: 14px;
-        margin-top: 10px;
+    Input, select {
+        padding: 5px;
+
+        background-color: rgb(243, 243, 243);
+
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    q.pequeno {
+        background-color: rgba(0, 202, 0, 0.185);
+        color: rgb(1, 109, 1);
+
+        padding: 5px;
+        border: 1px solid rgb(3, 210, 3);
+        border-radius: 20px;
+        
         text-align: center;
+        width: 90px;
     }
 
-    body {
-        padding-bottom: 70px;
+    q.medio {
+        background-color: rgba(247, 214, 2, 0.287);
+        color: rgb(129, 127, 1);
+
+        padding: 5px;
+        border: 1px solid rgb(177, 171, 3);
+        border-radius: 20px;
+
+        text-align: center;
+        width: 90px;
     }
 
-    .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
+    q.grande {
+        background-color: rgba(255, 0, 0, 0.335);
+        color: rgb(122, 2, 2);
+
+        padding: 5px;
+        border: 1px solid rgb(150, 3, 3);
+        border-radius: 20px;
+
+        text-align: center;
+        width: 90px;
+    }
+
+    textarea {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+
+        background-color: rgb(243, 243, 243);
+
+        padding: 5px;
+    }
+
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+    }
+
+
+/* END STYLE CRUD */
+
+
+
+
+/* STYLE STATUS */
+
+    .status-blue {
+        background-color: rgba(1, 1, 255, 0.283);
+        color: rgb(42, 87, 251);
+
+        padding: 5px;
+        max-width: 100px;
+        text-align: center;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+    }
+
+    .status-green {
+        background-color: rgba(0, 111, 0, 0.228);
+        color: green;
+
+        padding: 5px;
+        max-width: 100px;
+        text-align: center;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+    }
+
+    .status-red {
+        background-color: rgba(255, 0, 0, 0.252);
+        color: red;
+
+        padding: 5px;
+        max-width: 100px;
+        text-align: center;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+    }
+
+    .status-gold {
+        background-color: rgba(222, 222, 4, 0.324);
+        color: rgb(126, 126, 0);
+
+        padding: 5px;
+        max-width: 100px;
+        text-align: center;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+    }
+
+    .status-gray {
+        background-color: rgba(128, 128, 128, 0.251);
+        color: rgb(116, 116, 116);
+
+        padding: 5px;
+        max-width: 100px;
+        text-align: center;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+    }
+
+/* END STYLE STATUS */
+
+
+
+
+/* INPUTS */
+
+    .input-search {
         width: 100%;
+        height: 45px;
+        padding-left: 10px;
+
+        border: none;
+        border-radius: 10px;
+
+        background-color: rgb(207, 207, 207);
+    }
+
+    .input-search::placeholder {
+        color: rgb(67, 67, 67);
+    }
+
+/* END INPUTS */
+
+/* ICONS */
+
+    .icons {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+    }
+
+    .icons-header-w {
+        width: 20px;
+        height: 20px;
+    }
+
+    .icons-nav {
+        width: 20px;
+        height: 20px;
+        color: black;
+    }
+
+    .icons-card-info {
+        width: 40px;
+        height: 40px;
+    }
+
+/* END ICONS */
+
+/* IMG */
+    /* header blue */
+
+    .img-pet-header-blue {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+    }
+
+    /* end header blue */
+
+    /* STYLE HEADER WHITE */
+
+    .img-header-w {
+        width: 50px;
+        height: 50px;
+    }
+
+    .img-pet-service {
+        width: 40px;
+        height: 40px;
+    }
+
+    .img-pet {
+        width: 50px;
+        height: 50px;
+    }
+
+    .img-card-info {
+        width: 90px;
+        height: 90px;
+        border-radius: 10px;
+    }
+
+/* END IMG */
+
+/* HEADER BLUE STATUS */
+
+    .status-green-header {
+        background-color: rgba(2, 189, 2, 0.526);
+        color: #fff;
+        text-align: center;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    .status-red-header {
+        background-color: rgba(255, 1, 1, 0.789);
+        color: #fff;
+        text-align: center;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+/* END HEADER BLUE STATUS */
+
+/* GRID IN HOME PAGE */
+
+    .card-grid-status {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        
         display: flex;
         justify-content: center;
-        gap: 50px;
-        padding: 10px;
-        z-index: 1000;
+        align-items: flex-start;
+        gap: 10px;
     }
+
+    .card-grid-status p {
+        margin: 0;
+    }
+
+    .text-count {
+        margin: 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+/* END GRID IN HOME PAGE */
+
+/* STYLE NAVBAR */
+
+.btn-nav {
+    border-bottom: 3px solid blue;
+    width: 45px;
+    color: blue;
+    font-weight: bold;
 }
+
+.text-nav {
+    font-size: 9px;
+    margin-bottom: 1px;
+}
+
+/* CARD LIST */
+
+    .card-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+        height: 100px;
+        margin-top: 20px;
+    }
+
+    .card-time {
+        flex: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 90px;
+        padding: 5px;
+    }
+
+    .card-list-img {
+        flex: 1;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        height: 90px;
+        padding: 5px;
+    }
+
+    .card-list-info {
+        flex: 4;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        height: 90px;
+        max-width: 150px;
+        min-width: 0;
+
+        padding: 5px;
+    }
+
+    .card-list-info p {
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .card-list-function {
+        flex: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 90px;
+        padding: 5px;
+    }
+
+    .card-list-status {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+
+        height: 90px;
+        padding: 5px;
+        padding-right: 10px;
+    }
+
+    .card-list-status .p-service {
+        font-size: 12px;
+    }
+
+    .card-list-status .p-status {
+        font-size: 12px;
+    }
+
+    .img-card-info-client {
+        width: 60px;
+        height: 60px;
+    }
+
+
+    /* END CARD-LIST */
+    
+    h4 {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        font-size: 15px;
+        font-weight: bold;
+
+        margin-bottom: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.card-info-pets {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.car-info-pets-list p {
+    font-size: 12px;
+}
+
+
+/* HEADER INFO */
+    .header-info {
+        display: flex;
+    }
+
+    .header-info-btn {
+        flex: 1;
+    }
+
+    .header-info-title {
+        flex: 2;
+        width: 100%;
+        padding-top: 5px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+/* END HEADER INFO  */
+
+
+/* CARD INFO USER */
+
+    .card-info-user {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgb(175, 174, 174);
+        border-radius: 5px;
+
+        height: 100px;
+        margin-top: 20px;
+        padding: 25px;
+
+        font-size: 12px;
+    }
+
+    .info-user {
+        display: flex;
+        flex-direction: column;
+        margin-top: 18px;
+    }
+
+    .info-user .p {
+        margin-top: -15px;
+    }
+/* END INFO USER */

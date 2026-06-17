@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/script.js"></script>
+    <title>Info cliente</title>
+</head>
+<body>
+    <header>
+        <div class="bg-primary d-flex justify-content-between px-2 pt-3">
+            <button class="bg-primary border-0">
+                <img src="../static/icons/arrow_back_white.svg" alt="back">
+            </button>
+
+            <button class="bg-primary border-0">
+                <img src="../static/icons/edit_file_white.svg" alt="edit">
+            </button>
+        </div>
+
+        <div class="bg-primary d-flex p-3 gap-3">
+            <img class="img-pet-header-blue" src="../static/icons/usuario.png" alt="photo-pet">
+
+            <div class="header-blue-about">
+                <h4 class="m-0 text-light">Carlos Silva</h4>
+                <p class="m-0 text-light">(62) 99299-8877</p>
+                <p class="m-0 text-light">Goiânia - GO</p>
+                <p class="status-green-header">Ativo</p>
+            </div>
+        </div>
+    </header>
+
+    <ul class="d-flex justify-content-center nav nav-tabs">
+
+        <li class="nav-item">
+            <button class="nav-link active"
+                    data-bs-toggle="tab"
+                    data-bs-target="#info-pets">
+                Pets
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link"
+                    data-bs-toggle="tab"
+                    data-bs-target="#info-plans">
+                Planos
+            </button>
+        </li>
+
+        <li class="nav-item">
+            <button class="nav-link"
+                    data-bs-toggle="tab"
+                    data-bs-target="#info-services">
+                Atendimentos
+            </button>
+        </li>
+
+    </ul>
+
+    <div class="container tab-content">
+
+        <div class="tab-pane fade show active" id="info-pets">
+            <div class="d-flex justify-content-between align-items-start p-1 mt-4">
+                <h2 class="fs-6">Pets do cliente</h2>
+                <a class="text-decoration-none" href="#">+ Novo Pet</a>
+            </div>
+
+            <div class="card-info-pets d-flex justify-content-around p-3 mt-3 gap-3 rounded">
+                <img class="img-card-info" src="../static/images/golden_retriever-p.jpg" alt="photo-pet">
+
+                <div class="Info flex-grow-1">
+                    <h4 class="m-0 pt-2">Bob</h4>
+                    <p class="m-0">Golden</p>
+                    <p class="m-0">Grande</p>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="border-0 bg-white">
+                        <img class="icons-card-info bg-white" src="../static/icons/chevron_right.svg" alt="plus">
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-info-pets d-flex justify-content-around p-3 gap-3 rounded">
+                <img class="img-card-info" src="../static/images/shihTzu.jpeg" alt="photo-pet">
+
+                <div class="about-list Info flex-grow-1">
+                    <h4 class="m-0 pt-2">Luna</h4>
+                    <p class="m-0">Shih Tzu</p>
+                    <p class="m-0">Pequeno</p>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="border-0 bg-white">
+                        <img class="icons-card-info bg-white" src="../static/icons/chevron_right.svg" alt="plus">
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex justify-content-between align-items-start p-1 mt-4">
+                    <h2 class="fs-6">Informações do cliente</h2>
+                </div>
+            </div>
+            <div class="container d-flex flex-column align-items-start border rounded mt-2">
+                <h6 class="fs-6 mt-3">Email</h6>
+                <p>carlos@email.com</p>
+            </div>
+
+            <div class="container d-flex flex-column align-items-start border rounded mt-2">
+                <h6 class="fs-6 mt-3">Endereço</h6>
+                <p>Rua das Flores, 123 - São Paulo, SP</p>
+            </div>
+            
+        </div>
+
+        <div class="tab-pane fade" id="info-plans">
+            Planos informações
+        </div>
+
+        <div class="tab-pane fade" id="info-services">
+            Atendimento
+        </div>
+
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

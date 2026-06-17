@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Info Users</title>
+</head>
+<body>
+    <div class="header-info mt-3 p-1 container-fluid">
+        <div class="header-info-btn">
+            <button class="bg-white border-0">
+                <img src="../static/icons/chevron_left.svg" alt="back">
+            </button>
+        </div>
+        <div class="header-info-title">
+            <h1 class="fs-6">Detalhes do Usuário</h1>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="container card-info-user">
+            <img class="img-card-info" src="../static/icons/usuario.png" alt="">
+            <div class="info-user">
+                <h4>Paulo Administrador</h4>
+                <p class="status-green">Ativo</p>
+                <p class="p">Administrador</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2 class="fs-6 pt-4 pb-2"><b>Informações pessoais</b></h2>
+
+            <p class="mb-0 mt-1 fs-6">Nome completo</p>
+            <label for="#">Paulo Administrador</label>
+
+            <p class="mb-0 mt-3 fs-6">Email</p>
+            <label for="#">paulo@email.com</label>
+
+            <p class="mb-0 mt-3 fs-6">Telefone</p>
+            <label for="#">(11) 99999-9999</label>
+
+            <p class="mb-0 mt-3 fs-6">Função</p>
+            <label for="#">Administrador</label>
+
+
+            <p class="mb-0 mt-3 fs-6">Data de cadastro</p>
+            <label for="#">15/01/2024</label>
+
+            <hr>
+
+            <label for="#">Permissões</label>
+            <p>Acesso total ao sistema</p>
+
+            <div class="d-flex justify-content-around gap-2">
+                <button class="btn btn-outline-primary w-100">
+                    Editar
+                </button>
+
+                <button class="btn btn-outline-danger w-100">
+                    Inativar
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

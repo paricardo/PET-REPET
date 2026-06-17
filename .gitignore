@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+
+# Variáveis de ambiente
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ambiente virtual
+venv/
+.venv/
+env/
+.env/
+.env
+
+# Flask
+instance/
+
+# Logs
+*.log
+
+# Banco SQLite
+*.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

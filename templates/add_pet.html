@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Cadastro - Clientes</title>
+</head>
+<body>
+    <header class="header-blue-add">
+        <div class="bg-primary d-flex justify-content-between pt-3 pb-3 px-2">
+            <button class="bg-primary border-0">
+                <img src="../static/icons/arrow_back_white.svg" alt="back">
+            </button>
+
+            <div class="bg-primary pt-2">
+                <h1 class="fs-5 text-white">Novo Pet</h1>
+            </div>
+
+            <button class="bg-primary border-0">
+                <img src="../static/icons/delete_white.svg" alt="back">
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+       <form class="d-flex flex-column gap-2 pt-3" action="#">
+            
+            <label for="phone-pet">Foto do pet:</label>
+            <input class="form-control" type="file" id="photo" name="photo" accept="image/*">
+
+            <label for="#">Nome do pet</label>
+            <input type="text" name="namePet" placeholder="Ex: Mel">
+
+            <label for="#">Raça</label>
+            <input type="text" name="petBreed" placeholder="Ex: Golden Retriever">
+
+            <label for="#">Porte</label>
+            <select id="porte" name="porte">
+                <option value="pequeno">Pequeno</option>
+                <option value="medio" selected>Médio</option>
+                <option value="grande">Grande</option>
+            </select>
+            <div class="pt-2 d-flex justify-content-around">
+                <q class="pequeno">Pequeno</q>
+                <q class="medio">Médio</q>
+                <q class="grande">Grande</q>
+            </div>
+
+            <label class="pt-2" for="#">Observações</label>
+            <textarea name="about-pet" id="about-pet" placeholder="Alguma observação sobre o pet..."></textarea>
+
+            <div class="d-flex justify-content-between pt-2 mx-2">
+                <label for="#">Pet ativo</label>
+                <input type="checkbox" name="pet-ativo" id="pet-ativo">
+            </div>
+
+            <div class="pt-5">
+                <button type="submit" class="btn btn-primary w-100">Salvar</button>
+            </div>
+       </form>
+
+    </main>
+
+     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

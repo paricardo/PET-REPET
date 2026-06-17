@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Ad User</title>
+</head>
+<body>
+    
+    <header class="header-blue-add">
+        <div class="bg-primary d-flex justify-content-between pt-3 pb-3 px-2">
+            <button class="bg-primary border-0">
+                <img src="../static/icons/arrow_back_white.svg" alt="back">
+            </button>
+
+            <div class="bg-primary pt-2">
+                <h1 class="fs-5 text-white">Novo Usuário</h1>
+            </div>
+
+            <button class="bg-primary border-0">
+                <img src="../static/icons/delete_white.svg" alt="back">
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+       <form class="d-flex flex-column gap-2 pt-3" action="#">
+
+            <label for="#">Nome Completo</label>
+            <input type="text" name="nameUser" placeholder="Ex: João da Silva">
+
+            <label for="#">Email</label>
+            <input type="text" name="emailUser" placeholder="exemplo@email.com">
+
+            <label for="#">Telefone</label>
+            <input type="text" name="phoneUser" placeholder="(11) 9999-9999">
+
+            <label for="#">Função</label>
+            <select id="size" name="funcao">
+                <option value="user">Usuário</option>
+                <option value="admin" selected>Administrador</option>
+            </select>
+
+            <div class="btn-func-user">
+                <div>
+                    <label for="#">Status</label>
+                </div>
+                <div class="d-flex gap-2 mt-2 btn-func-user">
+                    <button class="btn btn-outline-success w-100">Ativo</button>
+                    <button class="btn btn-outline-danger w-100">Inativo</button>
+                </div>
+            </div>
+
+            <div class="pt-5">
+                <button type="submit" class="btn btn-primary w-100">Salvar</button>
+            </div>
+       </form>
+
+    </main>
+
+
+     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
