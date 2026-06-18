@@ -1,0 +1,329 @@
+from peewee import *
+from playhouse.postgres_ext import BinaryJSONField
+from datetime import datetime
+import uuid
+
+
+db = PostgresqlDatabase(
+    "petshop",
+    user="postgres",
+    password="senha",
+    host="localhost",
+    port=5432
+)
+
+
+# =====================================================
+# BASE MODEL
+# =====================================================
+
+class BaseModel(Model):
+    class Meta:
+        database = db
+
+
+class UUIDModel(BaseModel):
+    id = UUIDField(
+        primary_key=True,
+        default=uuid.uuid4
+    )
+
+
+# =====================================================
+# USERS
+# =====================================================
+
+class User(UUIDModel):
+    ROLE_CHOICES = (
+        ("ADMIN", "ADMIN"),
+        ("EMPLOYEE", "EMPLOYEE"),
+    )
+
+    name = CharField(max_length=150)
+
+    email = CharField(
+        unique=True,
+        max_length=255
+    )
+
+    password_hash = CharField()
+
+    role = CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default="EMPLOYEE"
+    )
+
+    is_active = BooleanField(default=True)
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# CUSTOMERS
+# =====================================================
+
+class Customer(UUIDModel):
+    name = CharField(max_length=150)
+
+    phone = CharField(max_length=30)
+
+    email = CharField(
+        null=True
+    )
+
+    notes = TextField(
+        null=True
+    )
+
+    is_active = BooleanField(
+        default=True
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# PETS
+# =====================================================
+
+class Pet(UUIDModel):
+    SIZE_CHOICES = (
+        ("SMALL", "SMALL"),
+        ("MEDIUM", "MEDIUM"),
+        ("LARGE", "LARGE"),
+    )
+
+    customer = ForeignKeyField(
+        Customer,
+        backref="pets",
+        on_delete="CASCADE"
+    )
+
+    name = CharField(max_length=100)
+
+    breed = CharField(
+        max_length=100,
+        null=True
+    )
+
+    size = CharField(
+        max_length=10,
+        choices=SIZE_CHOICES
+    )
+
+    notes = TextField(
+        null=True
+    )
+
+    is_active = BooleanField(
+        default=True
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# SERVICES
+# =====================================================
+
+class Service(UUIDModel):
+    name = CharField(max_length=100)
+
+    description = TextField(
+        null=True
+    )
+
+    price_small = DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    price_medium = DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    price_large = DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    is_active = BooleanField(
+        default=True
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# PLANS
+# =====================================================
+
+class Plan(UUIDModel):
+    name = CharField(max_length=150)
+
+    description = TextField(
+        null=True
+    )
+
+    price = DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    duration_days = IntegerField()
+
+    # PostgreSQL
+    services_info = BinaryJSONField(
+        null=True
+    )
+
+    is_active = BooleanField(
+        default=True
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# CUSTOMER PLANS
+# =====================================================
+
+class CustomerPlan(UUIDModel):
+    STATUS_CHOICES = (
+        ("ACTIVE", "ACTIVE"),
+        ("EXPIRED", "EXPIRED"),
+        ("CANCELED", "CANCELED"),
+    )
+
+    customer = ForeignKeyField(
+        Customer,
+        backref="plans",
+        on_delete="CASCADE"
+    )
+
+    plan = ForeignKeyField(
+        Plan,
+        backref="customers",
+        on_delete="RESTRICT"
+    )
+
+    started_at = DateTimeField()
+
+    expires_at = DateTimeField()
+
+    price_paid = DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    status = CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="ACTIVE"
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+
+
+# =====================================================
+# APPOINTMENTS
+# =====================================================
+
+class Appointment(UUIDModel):
+
+    BILLING_CHOICES = (
+        ("ONE_TIME", "ONE_TIME"),
+        ("PLAN", "PLAN"),
+    )
+
+    STATUS_CHOICES = (
+        ("SCHEDULED", "SCHEDULED"),
+        ("COMPLETED", "COMPLETED"),
+        ("CANCELED", "CANCELED"),
+    )
+
+    customer = ForeignKeyField(
+        Customer,
+        backref="appointments",
+        on_delete="CASCADE"
+    )
+
+    pet = ForeignKeyField(
+        Pet,
+        backref="appointments",
+        on_delete="CASCADE"
+    )
+
+    service = ForeignKeyField(
+        Service,
+        backref="appointments",
+        on_delete="RESTRICT"
+    )
+
+    user = ForeignKeyField(
+        User,
+        backref="appointments",
+        on_delete="RESTRICT"
+    )
+
+    customer_plan = ForeignKeyField(
+        CustomerPlan,
+        backref="appointments",
+        null=True,
+        on_delete="SET NULL"
+    )
+
+    scheduled_at = DateTimeField()
+
+    billing_origin = CharField(
+        max_length=20,
+        choices=BILLING_CHOICES
+    )
+
+    final_price = DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0
+    )
+
+    status = CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="SCHEDULED"
+    )
+
+    notes = TextField(
+        null=True
+    )
+
+    created_at = DateTimeField(
+        default=datetime.utcnow
+    )
+Criando as tabelas
+MODELS = [
+    User,
+    Customer,
+    Pet,
+    Service,
+    Plan,
+    CustomerPlan,
+    Appointment
+]
+
+db.connect()
+db.create_tables(MODELS)
+db.close()
