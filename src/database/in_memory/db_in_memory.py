@@ -1,0 +1,20 @@
+#1
+USERS = []
+
+#2
+CUSTOMERS = []
+
+#3
+PETS = []
+
+#4
+SERVICES = []
+
+#5
+PLANS = []
+
+#6
+CUSTOMERS_PLANS = []
+
+#7
+APPOINTMENTS = []
