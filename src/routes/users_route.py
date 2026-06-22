@@ -46,12 +46,20 @@ def info_users():
 @users.route('/', methods=['GET'])
 def get():
     # listar todos do usuarios
-    pass
+    result = service.get()
 
-@users.route('/<int:id_user>', methods=['GET'])
+    return jsonify(result), 200
+
+
+@users.route('/<string:id_user>', methods=['GET'])
 def getById(id_user):
     # lista um usuario por id
-    pass
+
+    result = service.getById(id_user)
+
+    return jsonify(result), 200
+
+
 
 @users.route('/', methods=['POST'])
 def add():
@@ -62,12 +70,23 @@ def add():
 
     return jsonify(result), 201
 
-@users.route('/<int:id_user>', methods=['PUT'])
+
+
+@users.route('/<string:id_user>', methods=['PUT'])
 def update(id_user):
     # edita um usuario por id
-    pass
+    data = request.get_json()
 
-@users.route('/<int:id_user>', methods=['DELETE'])
+    result = service.update(id_user, **data)
+
+    return jsonify(result)
+
+
+
+@users.route('/<string:id_user>', methods=['DELETE'])
 def delete(id_user):
     # deleta um usuario por id
-    pass
+
+    result = service.delete(id_user)
+
+    return jsonify(result)
