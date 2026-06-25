@@ -1,46 +1,135 @@
-from src.schemas.users.user_create_schema import UserCreateSchema
-from werkzeug.security import generate_password_hash
-from src.core.enums.user_role import UserRole
-from src.database.in_memory.db_in_memory import USERS
+import bcrypt
+from datetime import datetime, timezone
 from uuid import uuid4
+
+from src.database.models.users import User
+from src.schemas.users.user_schema import *
+from src.core.enums.user_role import UserRole
+
 
 class UserService:
 
+    # ---------------------------
+    # helper
+    # ---------------------------
+    def get_user_entity(self, user_id):
+        return User.get_or_none(User.id == user_id)
+
+    # ---------------------------
+    # CREATE
+    # ---------------------------
     def add(self, data, current_user=None):
 
-        # valida schema antes (já feito na rota)
         user_data = UserCreateSchema(**data)
 
-        # 🔐 REGRA DE NEGÓCIO (role controlado aqui)
         role = UserRole.EMPLOYEE
 
-        # se quem está criando for admin, pode escolher role
         if current_user and current_user.role == UserRole.ADMIN:
             role = user_data.role or UserRole.EMPLOYEE
 
-        user = {
-            "id": uuid4(),
-            "name": user_data.name,
-            "email": user_data.email,
-            "password_hash": generate_password_hash(user_data.password),
-            "role": role 
-        }
+        password_hash = bcrypt.hashpw(
+            user_data.password.encode("utf-8"),
+            bcrypt.gensalt()
+        ).decode("utf-8")
 
-        USERS.append(user)
+        user = User.create(
+            id=str(uuid4()),
+            name=user_data.name,
+            email=user_data.email,
+            password_hash=password_hash,
+            role=role,
+            is_active=True,
+            created_at=datetime.now(timezone.utc)
+        )
 
-        return USERS
+        return UserResponseSchema(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            role=user.role,
+            is_active=user.is_active,
+            created_at=user.created_at
+        ).model_dump()
 
-    def get():
-        pass
+    # ---------------------------
+    # GET ALL
+    # ---------------------------
+    def get(self):
+        users = User.select()
 
+        return [
+            UserResponseSchema(
+                id=user.id,
+                name=user.name,
+                email=user.email,
+                role=user.role,
+                is_active=user.is_active,
+                created_at=user.created_at
+            ).model_dump()
+            for user in users
+        ]
 
-    def getById():
-        pass
+    # ---------------------------
+    # GET BY ID
+    # ---------------------------
+    def getById(self, id_user):
 
+        user = User.get_or_none(User.id == id_user)
 
-    def edit():
-        pass
+        if not user:
+            return {"error": "usuário não encontrado"}, 404
 
+        return UserResponseSchema(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            role=user.role,
+            is_active=user.is_active,
+            created_at=user.created_at
+        ).model_dump()
 
-    def delete():
-        pass
+    # ---------------------------
+    # UPDATE
+    # ---------------------------
+    def update(self, id_user, **data):
+
+        user = User.get_or_none(User.id == id_user)
+
+        if not user:
+            return {"error": "usuário não encontrado"}, 404
+
+        user_data = UserUpdateSchema(**data)
+        update_data = user_data.model_dump(exclude_unset=True)
+
+        if "password" in update_data:
+            update_data["password_hash"] = bcrypt.hashpw(
+                update_data["password_hash"].encode("utf-8"),
+                bcrypt.gensalt()
+            ).decode("utf-8")
+
+        User.update(**update_data).where(User.id == id_user).execute()
+
+        user = User.get(User.id == id_user)
+
+        return UserResponseSchema(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            role=user.role,
+            is_active=user.is_active,
+            created_at=user.created_at
+        ).model_dump()
+
+    # ---------------------------
+    # DELETE
+    # ---------------------------
+    def delete(self, id_user):
+
+        user = User.get_or_none(User.id == id_user)
+
+        if not user:
+            return {"error": "usuário não encontrado"}, 404
+
+        user.delete_instance()
+
+        return {"message": "Usuário removido com sucesso"}
