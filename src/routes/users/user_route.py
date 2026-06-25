@@ -9,14 +9,14 @@ service = UserService()
 
 @users.route('/', methods=['GET'])
 @jwt_required()
-def get():
+def list_all_users():
     result = service.get()
     return jsonify(result), 200
 
 
 @users.route('/<string:id_user>', methods=['GET'])
 @jwt_required()
-def get_by_id(id_user):
+def list_user(id_user):
     result = service.getById(id_user)
 
     if isinstance(result, tuple):
@@ -27,7 +27,7 @@ def get_by_id(id_user):
 
 @users.route('/', methods=['POST'])
 @jwt_required()
-def add():
+def add_user():
     data = request.get_json()
 
     current_user_id = get_jwt_identity()
@@ -41,7 +41,7 @@ def add():
 
 @users.route('/<string:id_user>', methods=['PUT'])
 @jwt_required()
-def update(id_user):
+def update_user(id_user):
     data = request.get_json()
 
     result = service.update(id_user, **data)
@@ -54,7 +54,8 @@ def update(id_user):
 
 @users.route('/<string:id_user>', methods=['DELETE'])
 @jwt_required()
-def delete(id_user):
+def delete_user(id_user):
+    
     result = service.delete(id_user)
 
     if isinstance(result, tuple):
