@@ -91,7 +91,7 @@ class UserService:
     # ---------------------------
     # UPDATE
     # ---------------------------
-    def update(self, id_user, **data):
+    def update(self, id_user, data):
 
         user = User.get_or_none(User.id == id_user)
 

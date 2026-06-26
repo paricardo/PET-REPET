@@ -99,6 +99,9 @@ class CustomerService:
 
 
 
+
+
+
     def activate(self, id_customer: int):
         pass
 

@@ -3,12 +3,12 @@ from src.services.customers_service import CustomerService
 
 service = CustomerService()
 
-customer = Blueprint("customers", __name__)
+customers = Blueprint("customers", __name__)
 
 #---------------------------------------
 # ROTA QUE LISTA TODOS OS CLIENTES
 #---------------------------------------
-@customer.route('/', methods=["GET"])
+@customers.route('/', methods=["GET"])
 def list_all_customers():
     
     result = service.get()
@@ -19,7 +19,7 @@ def list_all_customers():
 #---------------------------------------
 # ROTA QUE LISTA UM CLIENTE PELO ID
 #---------------------------------------
-@customer.route('/<int:id_customer>', methods=["GET"])
+@customers.route('/<int:id_customer>', methods=["GET"])
 def list_customer(id_customer):
 
     result = service.get_by_id(id_customer)
@@ -32,7 +32,7 @@ def list_customer(id_customer):
 #---------------------------------------
 # ROTA QUE CRIA UM CLIENTE NO BANCO
 #---------------------------------------
-@customer.route('/', methods=["POST"])
+@customers.route('/', methods=["POST"])
 def add_customers():
     data = request.get_json()
 
@@ -45,7 +45,7 @@ def add_customers():
 #---------------------------------------
 # ROTA QUE ATUALIZA O CLIENTE NO BANCO
 #---------------------------------------
-@customer.route('/<int:id_customer>', methods=["PUT"])
+@customers.route('/<int:id_customer>', methods=["PUT"])
 def update_customer(id_customer):
 
     result = service.update(id_customer)
@@ -58,7 +58,7 @@ def update_customer(id_customer):
 #---------------------------------------
 # ROTA QUE DELETA UM USUARIO DO BANCO
 #---------------------------------------
-@customer.route('/<int:id_customer>', methods=["DELETE"])
+@customers.route('/<int:id_customer>', methods=["DELETE"])
 def delete_customer(id_customer):
 
     result = service.delete(id_customer)
@@ -68,10 +68,10 @@ def delete_customer(id_customer):
     
     return jsonify(result), 200
 
-@customer.route('/<int:id_customer>', methods=["POST"])
+@customers.route('/<int:id_customer>', methods=["POST"])
 def activate(self, id_customer):
     pass
 
-@customer.route('/<int:id_customer>', methods=["POST"])
+@customers.route('/<int:id_customer>', methods=["POST"])
 def deactivate(self, id_customer):
     pass

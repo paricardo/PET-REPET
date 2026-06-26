@@ -44,7 +44,7 @@ def add_user():
 def update_user(id_user):
     data = request.get_json()
 
-    result = service.update(id_user, **data)
+    result = service.update(id_user, data)
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]
