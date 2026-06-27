@@ -2,11 +2,11 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 
 from config import DevelopmentConfig
-from src.routes.users.user_route import users
-from src.routes.users.user_ui_route import users_ui
+from src.routes.users.users_route import users
+from src.routes.users.users_ui_route import users_ui
 from src.routes.auths.auth_route import auth
 from src.routes.customers.customers_route import customers
-from src.routes.pets.pet_route import pets
+from src.routes.pets.pets_route import pets
 
 jwt = JWTManager()
 

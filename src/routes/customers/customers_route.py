@@ -3,7 +3,7 @@ from src.services.customers_service import CustomerService
 
 service = CustomerService()
 
-customers = Blueprint("customers", __name__)
+customers = Blueprint('customers', __name__)
 
 #---------------------------------------
 # ROTA QUE LISTA TODOS OS CLIENTES
@@ -36,9 +36,11 @@ def list_customer(id_customer):
 def add_customers():
     data = request.get_json()
 
-    result = service.create(data)
+    result = service.add(data)
+
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]
+    
     return jsonify(result), 201
 
 
@@ -48,11 +50,13 @@ def add_customers():
 @customers.route('/<int:id_customer>', methods=["PUT"])
 def update_customer(id_customer):
 
-    result = service.update(id_customer)
+    data = request.get_json()
+
+    result = service.update(id_customer, data)
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]
-    return jsonify(result), 201
+    return jsonify(result), 200
 
 
 #---------------------------------------

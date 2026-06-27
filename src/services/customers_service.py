@@ -10,10 +10,10 @@ class CustomerService:
     #---------------------------------------
     def get(self):
 
-        customers = Customer.select().order_by(Customer.name)
+        customers = Customer.select()
 
         return [
-            CustomerResponseSchema.model_validate(customer)
+            CustomerResponseSchema.model_validate(customers)
             for customer in customers
         ]
 
@@ -21,7 +21,7 @@ class CustomerService:
     #---------------------------------------
     # SERVIÇO QUE LISTA UM CLIENTE
     #---------------------------------------
-    def get_by_id(self, id_customer: str):
+    def get_by_id(self, id_customer: int):
 
         customer = Customer.get_or_none(
             Customer.id == UUID(id_customer)
@@ -91,7 +91,7 @@ class CustomerService:
         customer = Customer.get_or_none(Customer.id == id_customer)
 
         if not customer:
-            return {"error": "usuário não encontrado"}, 404
+            return {"error": "cliente não encontrado"}, 404
         
         customer.delete_instance()
 
