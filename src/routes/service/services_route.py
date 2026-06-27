@@ -19,7 +19,7 @@ def list_all_services():
 # ROTA QUE LISTA UM SERVIÇO
 #------------------------------------
 @service_route.route('/<int:id_service>', methods=['GET'])
-def list_service(id_service):
+def list_service(id_service: int):
 
     result = service.getById(id_service)
 
@@ -48,8 +48,8 @@ def add_service():
 #------------------------------------
 # ROTA QUE ATUALIZA UM SERVIÇO
 #------------------------------------
-@service_route.route('/int:id_service', methods=['PUT'])
-def update_service(id_service):
+@service_route.route('/<int:id_service>', methods=['PUT'])
+def update_service(id_service: int):
     
     data = request.get_json()
 
@@ -64,10 +64,10 @@ def update_service(id_service):
 #------------------------------------
 # ROTA QUE DELETA UM SERVIÇO
 #------------------------------------
-@service_route.route('/int:id_service', methods=['DELETE'])
-def delete_service(id_service):
+@service_route.route('/<int:id_service>', methods=['DELETE'])
+def delete_service(id_service: int):
 
-    result = service.update(id_service) 
+    result = service.delete(id_service) 
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]

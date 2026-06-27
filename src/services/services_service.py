@@ -4,32 +4,39 @@ from src.schemas.services.service_schema import *
 
 class ServiceService:
 
-    def get():
+    def get(self):
         
         services = Service.select()
 
         return [
-            ServiceResponseSchema.model_validate(services)
+            ServiceResponseSchema.model_validate(service).model_dump()
             for service in services
         ]
 
 
-    def getById(id_service: int):
+    def getById(self, id_service: int):
 
         service = Service.get_or_none(
-            Service.id == UUID(id_service)
+            Service.id == id_service
         )
 
         if not service:
-            raise ValueError("Serviço não encontrado.")
+            return {"error": "Serviço não encontrado."}, 404
 
-        return ServiceResponseSchema.model_validate(
-            service
-        )
+        return ServiceResponseSchema(
+            id=service.id,
+            name=service.name,
+            description=service.description,
+            price_small=service.price_small,
+            price_medium=service.price_medium,
+            price_large=service.price_large,
+            is_active=service.is_active,
+            created_at=service.created_at
+        ).model_dump()
 
 
     
-    def add(data):
+    def add(self, data):
 
         service_data = ServiceCreateSchema(**data)
 
@@ -41,12 +48,19 @@ class ServiceService:
             price_large=service_data.price_large
         )
 
-        return ServiceResponseSchema.model_validate(
-            service
+        return ServiceResponseSchema(
+            id=service.id,
+            name=service.name,
+            description=service.description,
+            price_small=service.price_small,
+            price_medium=service.price_medium,
+            price_large=service.price_large,
+            is_active=service.is_active,
+            created_at=service.created_at
         ).model_dump()
 
 
-    def update(id_service: int, data):
+    def update(self, id_service: int, data):
     
         service = Service.get_or_none(Service.id == id_service)
 
@@ -72,7 +86,7 @@ class ServiceService:
         ).model_dump()
 
 
-    def delete(id_service: int):
+    def delete(self, id_service: int):
         
         service = Service.get_or_none(Service.id == id_service)
 

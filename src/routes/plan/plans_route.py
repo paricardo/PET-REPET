@@ -18,10 +18,10 @@ def list_all_plans():
 #------------------------------------
 # ROTA QUE LISTA UM SERVIÇO
 #------------------------------------
-@plan.route('/<int:id_service>', methods=['GET'])
-def list_plan(id_service):
+@plan.route('/<int:id_plan>', methods=['GET'])
+def list_plan(id_plan: int):
 
-    result = service.getById(id_service)
+    result = service.getById(id_plan)
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]
@@ -48,8 +48,8 @@ def add_plan():
 #------------------------------------
 # ROTA QUE ATUALIZA UM SERVIÇO
 #------------------------------------
-@plan.route('/int:id_service', methods=['PUT'])
-def update_plan(id_plan):
+@plan.route('/<int:id_plan>', methods=['PUT'])
+def update_plan(id_plan: int):
     
     data = request.get_json()
 
@@ -64,10 +64,10 @@ def update_plan(id_plan):
 #------------------------------------
 # ROTA QUE DELETA UM SERVIÇO
 #------------------------------------
-@plan.route('/int:id_plan', methods=['DELETE'])
-def delete_service(id_plan):
+@plan.route('/<int:id_plan>', methods=['DELETE'])
+def delete_plan(id_plan: int):
 
-    result = service.update(id_plan) 
+    result = service.delete(id_plan) 
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]

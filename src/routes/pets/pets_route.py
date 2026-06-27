@@ -14,6 +14,7 @@ service = PetService()
 def list_all_pets():
     
     result = service.get()
+
     return jsonify(result), 200
 
 
@@ -21,7 +22,7 @@ def list_all_pets():
 # ROTA QUE LISTA UM USUÁRIO
 #------------------------------------
 @pets.route('/<int:id_pet>', methods=['GET'])
-def list_pet(id_pet):
+def list_pet(id_pet: int):
     
     result = service.getById(id_pet)
 
@@ -33,7 +34,7 @@ def list_pet(id_pet):
 #------------------------------------
 # ROTA QUE CRIA UM PET NO BANCO
 #------------------------------------
-@pets.route('/<int:id_pet>', methods=['POST'])
+@pets.route('/', methods=['POST'])
 def add_pet():
 
     data = request.get_json()
@@ -50,7 +51,7 @@ def add_pet():
 # ROTA QUE ATUALIZA UM PET NO BANCO
 #------------------------------------
 @pets.route('/<int:id_pet>', methods=['PUT'])
-def update_pet(id_pet):
+def update_pet(id_pet: int):
 
     data = request.get_json()
 
@@ -64,8 +65,8 @@ def update_pet(id_pet):
 #------------------------------------
 # ROTA QUE DELETA UM PET NO BANCO
 #------------------------------------
-@pets.route('/<int:id_pet', methods=['DELETE'])
-def delete_pet(id_pet):
+@pets.route('/<int:id_pet>', methods=['DELETE'])
+def delete_pet(id_pet: int):
 
     result = service.delete(id_pet)
 

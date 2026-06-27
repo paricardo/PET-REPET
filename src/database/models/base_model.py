@@ -1,15 +1,11 @@
-import uuid
-from peewee import Model, CharField, DateTimeField
+from peewee import Model, AutoField, DateTimeField
 from datetime import datetime
 from src.database.connection import db
 
 
 class BaseModel(Model):
 
-    id = CharField(
-        primary_key=True,
-        default=lambda: str(uuid.uuid4())
-    )
+    id = AutoField()
 
     created_at = DateTimeField(
         default=datetime.now

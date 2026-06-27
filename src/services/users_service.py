@@ -1,7 +1,5 @@
 import bcrypt
 from datetime import datetime, timezone
-from uuid import uuid4
-
 from src.database.models.users import User
 from src.schemas.users.user_schema import *
 from src.core.enums.user_role import UserRole
@@ -33,7 +31,7 @@ class UserService:
         ).decode("utf-8")
 
         user = User.create(
-            id=str(uuid4()),
+            id=int,
             name=user_data.name,
             email=user_data.email,
             password_hash=password_hash,

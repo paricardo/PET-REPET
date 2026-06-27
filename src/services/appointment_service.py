@@ -1,36 +1,46 @@
-from uuid import UUID 
 from src.database.models.appointments import Appointment
 from src.schemas.appointments.appointment_schema import *
 
 
 class AppointmentService:
 
-    def get():
+    def get(self):
         
         appointments = Appointment.select()
 
         return [
-            AppointmentResponseSchema.model_validate(appointment)
+            AppointmentResponseSchema.model_validate(appointment).model_dump()
             for appointment in appointments
         ]
 
 
-    def getById(id_appointment: int):
+    def getById(self, id_appointment: int):
 
-        appointments = Appointment.get_or_none(
-            Appointment.id == UUID(id_appointment)
+        appointment = Appointment.get_or_none(
+            Appointment.id == id_appointment
         )
 
-        if not appointments:
-            raise ValueError("Agendamento não encontrado.")
+        if not appointment:
+            return {"error": "Agendamento não encontrado."}, 404
 
-        return AppointmentResponseSchema.model_validate(
-            appointments
-        )
+        return AppointmentResponseSchema(
+            id=appointment.id,
+            customer_id=appointment.customer_id,
+            pet_id=appointment.pet_id,
+            service_id=appointment.service_id,
+            user_id=appointment.user_id,
+            customer_plan_id=appointment.customer_plan_id,
+            scheduled_at=appointment.scheduled_at,
+            billing_origin=appointment.billing_origin,
+            final_price=appointment.final_price,
+            status=appointment.status,
+            notes=appointment.notes,
+            created_at=appointment.created_at
+        ).model_dump()
 
 
     
-    def add(data):
+    def add(self, data):
 
         appointment_data = AppointmentCreateSchema(**data)
 
@@ -51,7 +61,7 @@ class AppointmentService:
         ).model_dump()
 
 
-    def update(id_appointment: int, data):
+    def update(self, id_appointment: int, data):
     
         appointment = Appointment.get_or_none(Appointment.id == id_appointment)
 
@@ -66,22 +76,22 @@ class AppointmentService:
         appointment = Appointment.get(Appointment.id == id_appointment)
 
         return AppointmentResponseSchema(
-            id=update_data.id,
-            customer_id=update_data.customer_id,
-            pet_id=update_data.pet_id,
-            service_id=update_data.service_id,
-            user_id=update_data.user_id,
-            customer_plan_id=update_data.customer_plan_id,
-            scheduled_at=update_data.scheduled_at,
-            billing_origin=update_data.billing_origin,
-            final_price=update_data.final_price,
-            status=update_data.status,
-            notes=update_data.notes,
-            created_at=update_data.created_at
+            id=appointment.id,
+            customer_id=appointment.customer_id,
+            pet_id=appointment.pet_id,
+            service_id=appointment.service_id,
+            user_id=appointment.user_id,
+            customer_plan_id=appointment.customer_plan_id,
+            scheduled_at=appointment.scheduled_at,
+            billing_origin=appointment.billing_origin,
+            final_price=appointment.final_price,
+            status=appointment.status,
+            notes=appointment.notes,
+            created_at=appointment.created_at
         ).model_dump()
 
 
-    def delete(id_appointment: int):
+    def delete(self, id_appointment: int):
         
         appointment = Appointment.get_or_none(Appointment.id == id_appointment)
 

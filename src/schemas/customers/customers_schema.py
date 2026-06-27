@@ -1,5 +1,4 @@
 from datetime import datetime
-from uuid import UUID
 from pydantic import BaseModel, EmailStr
 
 
@@ -19,7 +18,7 @@ class CustomerUpdateSchema(BaseModel):
 
 
 class CustomerResponseSchema(BaseModel):
-    id: UUID
+    id: int
     name: str
     phone: str
     email: str | None

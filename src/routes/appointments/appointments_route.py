@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from src.services.appointment_service import AppointmentService
 
-appointment = Blueprint('service', __name__)
+appointment = Blueprint('appointment', __name__)
 
 
 service = AppointmentService()
@@ -17,10 +17,10 @@ def list_all_appointments():
     return jsonify(result), 200
 
 #------------------------------------
-# ROTA QUE LISTA UM SERVIÇO
+# ROTA QUE LISTA UM AGENDAMENTO
 #------------------------------------
 @appointment.route('/<int:id_appointment>', methods=['GET'])
-def list_appointment(id_appointment):
+def list_appointment(id_appointment: int):
 
     result = service.getById(id_appointment)
 
@@ -30,7 +30,7 @@ def list_appointment(id_appointment):
     return jsonify(result), 200
 
 #------------------------------------
-# ROTA QUE CRIA UM SERVIÇO
+# ROTA QUE CRIA UM AGENDAMENTO
 #------------------------------------
 @appointment.route('/', methods=['POST'])
 def add_appointment():
@@ -47,10 +47,10 @@ def add_appointment():
 
 
 #------------------------------------
-# ROTA QUE ATUALIZA UM SERVIÇO
+# ROTA QUE ATUALIZA UM AGENDAMENTO
 #------------------------------------
-@appointment.route('/int:id_appointment', methods=['PUT'])
-def update_appointment(id_appointment):
+@appointment.route('/<int:id_appointment>', methods=['PUT'])
+def update_appointment(id_appointment: int):
     
     data = request.get_json()
 
@@ -63,12 +63,12 @@ def update_appointment(id_appointment):
 
 
 #------------------------------------
-# ROTA QUE DELETA UM SERVIÇO
+# ROTA QUE DELETA UM AGENDAMENTO
 #------------------------------------
-@appointment.route('/int:id_appointment', methods=['DELETE'])
-def delete_appointment(id_appointment):
+@appointment.route('/<int:id_appointment>', methods=['DELETE'])
+def delete_appointment(id_appointment: int):
 
-    result = service.update(id_appointment) 
+    result = service.delete(id_appointment) 
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]

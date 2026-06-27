@@ -13,7 +13,7 @@ class CustomerService:
         customers = Customer.select()
 
         return [
-            CustomerResponseSchema.model_validate(customers)
+            CustomerResponseSchema.model_validate(customer)
             for customer in customers
         ]
 
@@ -24,15 +24,21 @@ class CustomerService:
     def get_by_id(self, id_customer: int):
 
         customer = Customer.get_or_none(
-            Customer.id == UUID(id_customer)
+            Customer.id == id_customer
         )
 
         if not customer:
-            raise ValueError("Cliente não encontrado.")
+            return {"error": "Cliente não encontrado."}, 404
 
-        return CustomerResponseSchema.model_validate(
-            customer
-        )
+        return CustomerResponseSchema(
+            id=customer.id,
+            name=customer.name,
+            phone=customer.phone,
+            email=customer.email,
+            notes=customer.notes,
+            is_active=customer.is_active,
+            created_at=customer.created_at
+        ).model_dump()
 
 
     #---------------------------------------

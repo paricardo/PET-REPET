@@ -1,38 +1,45 @@
-from src.database.models.plans import Plans
+from src.database.models.plans import Plan
 from src.schemas.plans.plan_schema import *
 
 
 class PlanService:
     
-    def get():
+    def get(self):
         
-        plans = Plans.select()
+        plans = Plan.select()
 
         return [
-            PlanResponseSchema.model_validate(plan)
+            PlanResponseSchema.model_validate(plan).model_dump()
             for plan in plans
         ]
 
 
-    def getById(id_plan: int):
+    def getById(self, id_plan: int):
 
-        plan = Plans.get_or_none(
-            Plans.id == UUID(id_plan)
+        plan = Plan.get_or_none(
+            Plan.id == id_plan
         )
 
         if not plan:
-            raise ValueError("Serviço não encontrado.")
+            return {"error": "Plano não encontrado."}, 404
 
-        return PlanResponseSchema.model_validate(
-            plan
-        )
+        return PlanResponseSchema(
+            id=plan.id,
+            name=plan.name,
+            description=plan.description,
+            price=plan.price,
+            duration_days=plan.duration_days,
+            services_info=plan.services_info,
+            is_active=plan.is_active,
+            created_at=plan.created_at
+        ).model_dump()
 
 
-    def add(data):
+    def add(self, data):
         
         plan_data = PlanCreateSchema(**data)
 
-        plan = Plans.create(
+        plan = Plan.create(
             name=plan_data.name,
             description=plan_data.description,
             price=plan_data.price,
@@ -45,9 +52,9 @@ class PlanService:
         ).model_dump()
 
 
-    def update(id_plan: int, data):
+    def update(self, id_plan: int, data):
         
-        plan = Plans.get_or_none(Plans.id == id_plan)
+        plan = Plan.get_or_none(Plan.id == id_plan)
 
         if not plan:
             return {"error": "Plano não encontrado"}, 404
@@ -55,25 +62,25 @@ class PlanService:
         plan_data = PlanUpdateSchema(**data)
         update_data = plan_data.model_dump(exclude_unset=True)
 
-        Plans.update(**update_data).where(Plans.id == id_plan).execute()
+        Plan.update(**update_data).where(Plan.id == id_plan).execute()
 
-        plan = Plans.get(Plans.id == id_plan)
+        plan = Plan.get(Plan.id == id_plan)
 
         return PlanResponseSchema(
-            id=plan_data.id,
-            name=plan_data.name,
-            description=plan_data.description,
-            price=plan_data.price,
-            duration_days=plan_data.duration_days,
-            services_info=plan_data.services_info,
-            is_active=plan_data.is_active,
-            created_at=plan_data.created_at
+            id=plan.id,
+            name=plan.name,
+            description=plan.description,
+            price=plan.price,
+            duration_days=plan.duration_days,
+            services_info=plan.services_info,
+            is_active=plan.is_active,
+            created_at=plan.created_at
         ).model_dump()
 
 
-    def delete(id_plan: int):
+    def delete(self, id_plan: int):
         
-        plan = Plans.get_or_none(Plans.id == id_plan)
+        plan = Plan.get_or_none(Plan.id == id_plan)
 
         if not plan:
             return {"error": "Plano não encontrado"}, 404

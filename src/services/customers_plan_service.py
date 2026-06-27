@@ -6,33 +6,45 @@ from src.schemas.customer_plans.customer_plan_schema import *
 
 class CustomerPlanService:
 
-    def get():
+    def get(self):
         
-        customers_plan = CustomerPlan.select()
+        customer_plans = CustomerPlan.select()
 
-        return [
-            CustomerPlanResponseSchema.model_validate(customer_plan)
-            for customer_plan in customers_plan
-        ]
+        return CustomerPlanResponseSchema(
+            id=customer_plans.id,
+            customer_id=customer_plans.customer_id,
+            plan_id=customer_plans.plan_id,
+            started_at=customer_plans.started_at,
+            expires_at=customer_plans.expires_at,
+            price_paid=customer_plans.price_paid,
+            status=customer_plans.status,
+            created_at=customer_plans.created_at
+        )
 
 
-
-    def getById(id_customer_plan: int):
+    def getById(self, id_customer_plan: int):
         
         customer_plans = CustomerPlan.get_or_none(
-            CustomerPlan.id == UUID(id_customer_plan)
+            CustomerPlan.id == id_customer_plan
         )
 
         if not customer_plans:
-            raise ValueError("Customer_plan não encontrado.")
+            return {"error": "Serviço do cliente não encontrado."}
 
-        return CustomerPlanResponseSchema.model_validate(
-            customer_plans
-        )
+        return CustomerPlanResponseSchema(
+            id=customer_plans.id,
+            customer_id=customer_plans.customer_id,
+            plan_id=customer_plans.plan_id,
+            started_at=customer_plans.started_at,
+            expires_at=customer_plans.expires_at,
+            price_paid=customer_plans.price_paid,
+            status=customer_plans.status,
+            created_at=customer_plans.created_at
+        ).model_dump()
 
 
 
-    def add(data):
+    def add(self, data):
         
         customer_plan_data = CustomerPlanCreateSchema(**data)
 
@@ -49,11 +61,13 @@ class CustomerPlanService:
 
 
 
-    def update(id_customer_plan: int, data):
+    def update(self, id_customer_plan: int, data):
         
-        customer_plans = CustomerPlan.get_or_none(CustomerPlan.id == id_customer_plan)
+        customer_plan = CustomerPlan.get_or_none(
+            CustomerPlan.id == id_customer_plan
+        )
 
-        if not customer_plans:
+        if not customer_plan:
             return {"error": "Customer_plan não encontrado"}, 404
         
         customer_plan_data = CustomerPlanUpdateSchema(**data)
@@ -76,7 +90,7 @@ class CustomerPlanService:
 
 
 
-    def delete(id_customer_plan: int):
+    def delete(self, id_customer_plan: int):
         
         customer_plan = CustomerPlan.get_or_none(CustomerPlan.id == id_customer_plan)
 

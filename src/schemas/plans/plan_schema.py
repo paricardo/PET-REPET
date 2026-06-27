@@ -1,6 +1,5 @@
 from datetime import datetime
 from decimal import Decimal
-from uuid import UUID
 from pydantic import BaseModel
 
 
@@ -22,7 +21,7 @@ class PlanUpdateSchema(BaseModel):
 
 
 class PlanResponseSchema(BaseModel):
-    id: UUID
+    id: int
     name: str
     description: str | None
     price: Decimal

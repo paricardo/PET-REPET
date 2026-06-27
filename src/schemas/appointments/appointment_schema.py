@@ -1,4 +1,3 @@
-from uuid import UUID
 from datetime import datetime
 from pydantic import BaseModel
 from decimal import Decimal
@@ -7,11 +6,11 @@ from src.core.enums.billing_origin import BillingOrigin
 
 
 class AppointmentCreateSchema(BaseModel):
-    customer_id: UUID
-    pet_id: UUID
-    service_id: UUID
-    user_id: UUID
-    customer_plan_id: UUID | None = None
+    customer_id: int
+    pet_id: int
+    service_id: int
+    user_id: int
+    customer_plan_id: int | None = None
     scheduled_at: datetime
     billing_origin: BillingOrigin
     final_price: Decimal
@@ -26,12 +25,12 @@ class AppointmentUpdateSchema(BaseModel):
 
 
 class AppointmentResponseSchema(BaseModel):
-    id: UUID
-    customer_id: UUID
-    pet_id: UUID
-    service_id: UUID
-    user_id: UUID
-    customer_plan_id: UUID | None
+    id: int
+    customer_id: int
+    pet_id: int
+    service_id: int
+    user_id: int
+    customer_plan_id: int | None
 
     scheduled_at: datetime
     billing_origin: BillingOrigin

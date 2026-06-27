@@ -68,14 +68,14 @@ def delete_customer(id_customer):
     result = service.delete(id_customer)
 
     if isinstance(result, tuple):
-        return jsonify(result[0], result[1])
+        return jsonify(result[0]), result[1]
     
     return jsonify(result), 200
 
-@customers.route('/<int:id_customer>', methods=["POST"])
-def activate(self, id_customer):
+@customers.route('/<int:id_customer>/activate', methods=["POST"])
+def activate(id_customer):
     pass
 
-@customers.route('/<int:id_customer>', methods=["POST"])
-def deactivate(self, id_customer):
+@customers.route('/<int:id_customer>/deactivate', methods=["POST"])
+def deactivate(id_customer):
     pass

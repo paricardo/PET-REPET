@@ -3,27 +3,27 @@ from src.database.models.pets import Pet
 
 class PetService:
     # LISTA TODOS
-    def get():
+    def get(self):
         
         pets = Pet.select()
 
         return [
             PetResponseSchema(
-                id=pets.id,
-                customer=pets.customers_id,
-                name=pets.name,
-                breed=pets.breed,
-                size=pets.size,
-                notes=pets.notes,
-                is_active=pets.is_active,
-                created_at=pets.created_at
+                id=pet.id,
+                customer_id=pet.customers_id,
+                name=pet.name,
+                breed=pet.breed,
+                size=pet.size,
+                notes=pet.notes,
+                is_active=pet.is_active,
+                created_at=pet.created_at
             ).model_dump()
             for pet in pets
         ]
 
 
     # LISTA UM
-    def getById(id_pet: int):
+    def getById(self, id_pet: int):
         
         pet = Pet.get_or_none(Pet.id == id_pet)
 
@@ -32,7 +32,7 @@ class PetService:
         
         return PetResponseSchema(
             id=pet.id,
-            customer=pet.customers_id,
+            customer_id=pet.customers_id,
             name=pet.name,
             breed=pet.breed,
             size=pet.size,
@@ -42,7 +42,7 @@ class PetService:
         ).model_dump()
 
     # ADD PETS
-    def add(data):
+    def add(self, data):
         pet_data = PetCreateSchema(**data)
 
         pet = Pet.create(
@@ -60,7 +60,7 @@ class PetService:
 
 
     # UPDATE PETS
-    def update(id_pet: int, data):
+    def update(self, id_pet: int, data):
         
         pet = Pet.get_or_none(Pet.id == id_pet)
 
@@ -72,13 +72,14 @@ class PetService:
 
         Pet.update(**update_data).where(Pet.id == id_pet).execute()
 
-        pet = pet.get(pet.id == id_pet)
+        pet = Pet.get(Pet.id == id_pet)
 
         return PetResponseSchema(
             id=pet.id,
+            customer_id=pet.customer_id,
             name=pet.name,
-            phone=pet.phone,
-            email=pet.email,
+            breed=pet.breed,
+            size=pet.size,
             notes=pet.notes,
             is_active=pet.is_active,
             created_at=pet.created_at
@@ -88,7 +89,7 @@ class PetService:
 
     
     # DELETE PETS
-    def delete(id_pet: int):
+    def delete(self, id_pet: int):
         
         pet = Pet.get_or_none(Pet.id == id_pet)
 
@@ -97,7 +98,7 @@ class PetService:
         
         pet.delete_instance()
 
-        return {"error": "Pet removido com sucessso"}
+        return {"message": "Pet removido com sucesso"}, 200
     
 
 

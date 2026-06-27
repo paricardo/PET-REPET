@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from src.services.customers_plan_service import CustomerPlanService
 
 
-customer_plan = Blueprint('customer-plan', __name__)
+customer_plan = Blueprint('customer_plan', __name__)
 
 service = CustomerPlanService()
 
@@ -70,7 +70,7 @@ def update_customer_plan(id_customer_plan):
 @customer_plan.route('/<int:id_customer_plan>', methods=['DELETE'])
 def delete_customer_plan(id_customer_plan):
     
-    result = service.update(id_customer_plan) 
+    result = service.delete(id_customer_plan) 
 
     if isinstance(result, tuple):
         return jsonify(result[0]), result[1]

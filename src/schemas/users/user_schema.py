@@ -1,4 +1,3 @@
-from uuid import UUID
 from datetime import datetime
 from typing import Optional
 from src.core.enums.user_role import UserRole
@@ -19,7 +18,7 @@ class UserUpdateSchema(BaseModel):
 
 
 class UserResponseSchema(BaseModel):
-    id: UUID
+    id: int
     name: str
     email: EmailStr
     role: UserRole

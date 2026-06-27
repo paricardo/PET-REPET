@@ -56,7 +56,7 @@ class AuthService:
 
         # 3. Criar usuário
         user = User.create(
-            id=str(uuid4()),
+            id=int,
             name=name,
             email=email,
             password_hash=password_hash,  # 🔥 TEM QUE SER ESSE NOME

@@ -1,12 +1,11 @@
 from pydantic import BaseModel
-from uuid import UUID
 from datetime import datetime
 from src.core.enums.pet_size import PetSize
 
 
 
 class PetCreateSchema(BaseModel):
-    customer_id: UUID
+    customer_id: int
     name: str
     breed: str | None = None
     size: PetSize
@@ -22,8 +21,8 @@ class PetUpdateSchema(BaseModel):
 
 
 class PetResponseSchema(BaseModel):
-    id: UUID
-    customer_id: UUID
+    id: int
+    customer_id: int
     name: str
     breed: str | None
     size: PetSize
