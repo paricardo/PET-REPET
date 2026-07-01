@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    <title>Ad User</title>
+    <title>Cadastro - Clients</title>
 </head>
 <body>
-    
     <header class="header-blue-add">
         <div class="bg-primary d-flex justify-content-between pt-3 pb-3 px-2">
-            <a href="{{ url_for('users.list_all_users') }}" class="bg-primary border-0">
+            <a href="{{ url_for('customers.list_all_customers') }}" class="bg-primary border-0">
                 <img src="../static/icons/arrow_back_white.svg" alt="back">
             </a>
 
             <div class="bg-primary pt-2">
-                <h1 class="fs-5 text-white">Novo Usuário</h1>
+                <h1 class="fs-5 text-white">Novo Cliente</h1>
             </div>
 
             <button class="bg-primary border-0">
@@ -26,24 +25,24 @@
     </header>
 
     <main class="container">
-       <form class="d-flex flex-column gap-2 pt-3" method="post" action="{{ url_for('users.create_users') }}">
+       <form class="d-flex flex-column gap-2 pt-3" method="post" action="{{ url_for('customers.create_customers') }}">
 
-            <label for="#">Nome Completo</label>
-            <input type="text" name="name" placeholder="Ex: João da Silva">
+            <label for="#">Nome do Client:</label>
+            <input type="text" name="name" placeholder="Ex: Carlos">
 
-            <label for="#">Email</label>
-            <input type="text" name="email" placeholder="exemplo@email.com">
+            <label for="#">Telefone:</label>
+            <input type="text" name="phone" placeholder="Ex: (62) 9888-7777">
 
-            <label for="#">Senha</label>
-            <input type="password" name="password" placeholder="Digite sua senha aqui...">
+            <label for="#">Email:(opcional)</label>
+            <input type="text" name="email" placeholder="Ex: carlos@gmail.com">
 
-            <label for="#">Função</label>
-            <select id="size" name="role">
-                <option value="USER">USER</option>
-                <option value="ADMIN8" selected>ADMIN</option>
-            </select>
+            <label class="pt-2" for="#">Endereço:</label>
+            <textarea name="about-pet" id="about-pet" placeholder="Endereço aqui..."></textarea>
 
-            <div class="btn-func-user">
+            <label class="pt-2" for="#">Notas</label>
+            <textarea name="about-pet" id="about-pet" placeholder="Alguma observação?..."></textarea>
+
+             <div class="btn-func-user">
                 <div>
                     <label for="#">Status</label>
                 </div>
@@ -71,6 +70,7 @@
     </main>
 
 
+
     <script>
         const btnActive = document.getElementById("btn-active");
         const btnInactive = document.getElementById("btn-inactive");
@@ -92,7 +92,6 @@
         });
     </script>
 
-
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
+     <script src="../static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

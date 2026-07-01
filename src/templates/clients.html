@@ -15,31 +15,52 @@
 
         <div>
             <form>
+
                 <div class="mb-3 mt-3">
-                    <input class="input-search" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="&#128269 Buscar por nome ou telefone">
+                    <input class="input-search form-control"
+                    type="text"
+                    placeholder="🔍 Buscar por nome ou telefone">
                 </div>
-                
-                <button type="submit" class="btn btn-primary w-100">+ Novo Cliente</button>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Pesquisar
+                </button>
+
             </form>
+
+            <a class="mt-2 btn btn-success w-100"
+                href="{{ url_for('customers.form_customers') }}">
+                + Novo Cliente
+            </a>
         </div>
 
-        <div class="card-list">
-            <div class="card-list-img">
-                <img class="img-card-info-client" src="../static/icons/usuario.png" alt="photo-pet">
-            </div>
+        {% for c in CUSTOMERS %}
 
-            <div class="card-list-info">
-                <h4>Carlos Silva</h4>
-                <p class="p-0 m-0">(11) 99268-7766</p>
-                <p class="p-0 m-0">São Paulo - SP</p>
-                <p class="p-0 m-0">2 pets</p>
-            </div>
+            <a href="{{ url_for('customers.info_customers', id_customer=c['id']) }}"
+                class="text-decoration-none text-dark">
+                
+                <div class="card-list">
+                    <div class="card-list-img">
+                        <img class="img-card-info-client" src="../static/icons/usuario.png" alt="photo-pet">
+                    </div>
 
-            <div class="card-list-status">
-                <p class="status-green">Ativo</p>
-            </div>
-        </div>
+                    <div class="card-list-info">
+                        <h4>{{ c.name }}</h4>
+                        <p class="p-0 m-0">{{ c.phone }}</p>
+                        <p class="p-0 m-0">{{ c.pets }}</p>
+                    </div>
 
+                    <div class="card-list-status">
+                        {% if c.is_active == True %}
+                            <p class="status-green">ATIVO</p>
+                        {% else %}
+                            <p class="status-gray">INATIVO</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </a>
+        {% endfor %}
     </main>
 
 

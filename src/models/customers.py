@@ -3,7 +3,7 @@ from peewee import (
     TextField,
     BooleanField
 )
-from src.database.models.base_model import BaseModel
+from src.models.base_model import BaseModel
 
 
 class Customer(BaseModel):

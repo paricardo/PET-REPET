@@ -6,12 +6,12 @@ from peewee import (
     DecimalField
 )
 
-from src.database.models.base_model import BaseModel
-from src.database.models.customers import Customer
-from src.database.models.pets import Pet
-from src.database.models.services import Service
-from src.database.models.users import User
-from src.database.models.customer_plans import CustomerPlan
+from src.models.base_model import BaseModel
+from src.models.customers import Customer
+from src.models.pets import Pet
+from src.models.services import Service
+from src.models.users import User
+from src.models.customer_plans import CustomerPlan
 
 
 class Appointment(BaseModel):

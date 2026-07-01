@@ -1,12 +1,12 @@
 from database.connection import db
 
-from src.database.models.users import User
-from src.database.models.customers import Customer
-from src.database.models.pets import Pet
-from src.database.models.services import Service
-from src.database.models.plans import Plan
-from src.database.models.customer_plans import CustomerPlan
-from src.database.models.appointments import Appointment
+from src.models.users import User
+from src.models.customers import Customer
+from src.models.pets import Pet
+from src.models.services import Service
+from src.models.plans import Plan
+from src.models.customer_plans import CustomerPlan
+from src.models.appointments import Appointment
 
 
 def create_tables():

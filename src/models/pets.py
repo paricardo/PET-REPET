@@ -4,8 +4,8 @@ from peewee import (
     TextField,
     BooleanField
 )
-from src.database.models.base_model import BaseModel
-from src.database.models.customers import Customer
+from src.models.base_model import BaseModel
+from src.models.customers import Customer
 
 
 class Pet(BaseModel):

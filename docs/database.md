@@ -47,10 +47,12 @@ Tutores/donos dos pets.
 | `name`       | string    |                |
 | `phone`      | string    |                |
 | `email`      | string    | opcional       |
+| `address`    | string    | not null       |
 | `notes`      | text      | opcional       |
 | `is_active`  | boolean   | default `true` |
 | `created_at` | datetime  |                |
 
+| `pets`       | string    |                |
 ---
 
 ## 3. pets

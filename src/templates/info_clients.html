@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <title>Info cliente</title>
 </head>
 <body>
     <header>
         <div class="bg-primary d-flex justify-content-between px-2 pt-3">
-            <button class="bg-primary border-0">
-                <img src="../static/icons/arrow_back_white.svg" alt="back">
-            </button>
+            <a href="{{url_for('customers.list_all_customers' )}}" class="bg-primary border-0">
+                <img src="{{ url_for('static', filename='icons/arrow_back_white.svg') }}" alt="back">
+            </a>
 
-            <button class="bg-primary border-0">
-                <img src="../static/icons/edit_file_white.svg" alt="edit">
-            </button>
+            <a href="{{ url_for('customers.form_edit_customers', id_customer=customer.id) }}" class="bg-primary border-0">
+                <img src="{{ url_for('static', filename='icons/edit_file_white.svg') }}" alt="edit">
+            </a>
         </div>
 
         <div class="bg-primary d-flex p-3 gap-3">
-            <img class="img-pet-header-blue" src="../static/icons/usuario.png" alt="photo-pet">
+            <img class="img-pet-header-blue"
+                 src="{{ url_for('static', filename='icons/usuario.png') }}"
+                 alt="photo-pet">
 
             <div class="header-blue-about">
-                <h4 class="m-0 text-light">Carlos Silva</h4>
-                <p class="m-0 text-light">(62) 99299-8877</p>
-                <p class="m-0 text-light">Goiânia - GO</p>
-                <p class="status-green-header">Ativo</p>
+                <h4 class="m-0 text-light">{{ customer.name }}</h4>
+                
+                <p class="m-0 text-light">{{ customer.phone }}</p>
+
+                {% if customer.is_active %}
+                    <p class="status-green-header">Ativo</p>
+                {% else %}
+                    <p class="status-red-header">Inativo</p>
+                {% endif %}
             </div>
         </div>
     </header>
 
     <ul class="d-flex justify-content-center nav nav-tabs">
-
         <li class="nav-item">
             <button class="nav-link active"
                     data-bs-toggle="tab"
@@ -56,7 +64,6 @@
                 Atendimentos
             </button>
         </li>
-
     </ul>
 
     <div class="container tab-content">
@@ -68,7 +75,9 @@
             </div>
 
             <div class="card-info-pets d-flex justify-content-around p-3 mt-3 gap-3 rounded">
-                <img class="img-card-info" src="../static/images/golden_retriever-p.jpg" alt="photo-pet">
+                <img class="img-card-info"
+                     src="{{ url_for('static', filename='images/golden_retriever-p.jpg') }}"
+                     alt="photo-pet">
 
                 <div class="Info flex-grow-1">
                     <h4 class="m-0 pt-2">Bob</h4>
@@ -78,13 +87,17 @@
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="border-0 bg-white">
-                        <img class="icons-card-info bg-white" src="../static/icons/chevron_right.svg" alt="plus">
+                        <img class="icons-card-info bg-white"
+                             src="{{ url_for('static', filename='icons/chevron_right.svg') }}"
+                             alt="plus">
                     </button>
                 </div>
             </div>
 
             <div class="card-info-pets d-flex justify-content-around p-3 gap-3 rounded">
-                <img class="img-card-info" src="../static/images/shihTzu.jpeg" alt="photo-pet">
+                <img class="img-card-info"
+                     src="{{ url_for('static', filename='images/shihTzu.jpeg') }}"
+                     alt="photo-pet">
 
                 <div class="about-list Info flex-grow-1">
                     <h4 class="m-0 pt-2">Luna</h4>
@@ -94,26 +107,26 @@
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="border-0 bg-white">
-                        <img class="icons-card-info bg-white" src="../static/icons/chevron_right.svg" alt="plus">
+                        <img class="icons-card-info bg-white"
+                             src="{{ url_for('static', filename='icons/chevron_right.svg') }}"
+                             alt="plus">
                     </button>
                 </div>
             </div>
 
-            <div>
-                <div class="d-flex justify-content-between align-items-start p-1 mt-4">
-                    <h2 class="fs-6">Informações do cliente</h2>
-                </div>
+            <div class="d-flex justify-content-between align-items-start p-1 mt-4">
+                <h2 class="fs-6">Informações do cliente</h2>
             </div>
+
             <div class="container d-flex flex-column align-items-start border rounded mt-2">
                 <h6 class="fs-6 mt-3">Email</h6>
-                <p>carlos@email.com</p>
+                <p>{{ customer.email }}</p>
             </div>
 
             <div class="container d-flex flex-column align-items-start border rounded mt-2">
                 <h6 class="fs-6 mt-3">Endereço</h6>
-                <p>Rua das Flores, 123 - São Paulo, SP</p>
+                <p>{{ customer.address }}</p>
             </div>
-            
         </div>
 
         <div class="tab-pane fade" id="info-plans">
@@ -126,6 +139,6 @@
 
     </div>
 
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

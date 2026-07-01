@@ -4,9 +4,9 @@ from peewee import (
     DecimalField,
     CharField
 )
-from src.database.models.base_model import BaseModel
-from src.database.models.customers import Customer
-from src.database.models.plans import Plan
+from src.models.base_model import BaseModel
+from src.models.customers import Customer
+from src.models.plans import Plan
 
 
 class CustomerPlan(BaseModel):

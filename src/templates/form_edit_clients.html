@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Edit Cliente</title>
+</head>
+<body>
+
+    <header class="header-blue-add">
+        <div class="bg-primary d-flex justify-content-between pt-3 pb-3 px-2">
+
+            <a href="{{ url_for('customers.list_all_customers') }}"
+               class="bg-primary border-0">
+
+                <img src="{{ url_for('static', filename='icons/arrow_back_white.svg') }}"
+                     alt="back">
+            </a>
+
+            <div class="bg-primary pt-2">
+                <h1 class="fs-5 text-white">Editar Cliente</h1>
+            </div>
+
+            <button class="bg-primary border-0">
+
+            </button>
+
+        </div>
+    </header>
+
+    <main class="container">
+
+        <form class="d-flex flex-column gap-2 pt-3"
+              method="post"
+              action="{{ url_for('customers.update_customers', id_customer=customer['id']) }}">
+
+            <label>Nome Completo:</label>
+            <input
+                type="text"
+                name="name"
+                value="{{ customer.name if customer else '' }}"
+                placeholder="Ex: João da Silva"
+            >
+
+            <label>Telefone:</label>
+            <input
+                type="text"
+                name="phone"
+                value="{{ customer.phone if customer else '' }}"
+            >
+
+            <label>Email:</label>
+            <input
+                type="text"
+                name="email"
+                value="{{ customer.email if customer else '' }}"
+                placeholder="exemplo@email.com"
+            >
+
+            <label>Endereço:</label>
+            <input
+                type="text"
+                name="address"
+                value="{{ customer.address if customer else '' }}"
+                placeholder="exemplo@email.com"
+            >
+
+            <label>Função:</label>
+
+            <div class="btn-func-user">
+
+                <div>
+                    <label>Status</label>
+                </div>
+
+                <div class="d-flex gap-2 mt-2">
+
+                    <input
+                        type="radio"
+                        class="btn-check"
+                        name="is_active"
+                        id="active"
+                        value="true"
+                        {% if customer.is_active %}checked{% endif %}
+                    >
+
+                    <label class="btn btn-outline-success w-100"
+                           for="active">
+                        Ativo
+                    </label>
+
+                    <input
+                        type="radio"
+                        class="btn-check"
+                        name="is_active"
+                        id="inactive"
+                        value="false"
+                        {% if not customer.is_active %}checked{% endif %}
+                    >
+
+                    <label class="btn btn-outline-danger w-100"
+                           for="inactive">
+                        Inativo
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="pt-5">
+                <button type="submit"
+                        class="btn btn-primary w-100">
+                    Atualizar
+                </button>
+            </div>
+
+        </form>
+
+        <form class="mt-2" action="{{ url_for('customers.delete_customers', id_customer=customer['id']) }}"
+            method="POST">
+
+                <button type="submit"
+                        class="btn btn-danger w-100">
+                    Deletar
+                </button>
+
+        </form>
+
+    </main>
+
+    <script>
+        const btnActive = document.getElementById("btn-active");
+        const btnInactive = document.getElementById("btn-inactive");
+
+        if (btnActive && btnInactive) {
+            btnActive.addEventListener("click", () => {
+                btnActive.classList.remove("btn-outline-success");
+                btnActive.classList.add("btn-success");
+
+                btnInactive.classList.remove("btn-danger");
+                btnInactive.classList.add("btn-outline-danger");
+            });
+
+            btnInactive.addEventListener("click", () => {
+                btnInactive.classList.remove("btn-outline-danger");
+                btnInactive.classList.add("btn-danger");
+
+                btnActive.classList.remove("btn-success");
+                btnActive.classList.add("btn-outline-success");
+            });
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+</html>
