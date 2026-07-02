@@ -6,7 +6,7 @@ from flask import (
     url_for
 )
 from src.database.in_memory.db_in_memory import CUSTOMERS
-
+from src.service.format_data import *
 customers_bp = Blueprint('customers', __name__)
 
 """
@@ -34,6 +34,31 @@ Tutores/donos dos pets.
 def list_all_customers():
 
     return render_template("clients.html", CUSTOMERS=CUSTOMERS)
+
+@customers_bp.route("/customer")
+def list_one_customer():
+
+    search = request.args.get("search", "").strip()
+
+    search_lower = search.lower()
+
+    search_phone = format_phone(search)
+    search_cpf = format_cpf(search)
+
+    customers_found = [
+        customer
+        for customer in CUSTOMERS
+        if (
+            search_lower in customer["name"].lower()
+            or customer["phone"] == search_phone
+            or customer["cpf"] == search_cpf
+        )
+    ]
+
+    return render_template(
+        "clients.html",
+        CUSTOMERS=customers_found
+    )
 
 
 @customers_bp.route('/info/<int:id_customer>', methods=['GET'])
@@ -79,6 +104,8 @@ def create_customers():
 
     new_customer = request.form.to_dict()
 
+    print(new_customer)
+
     if not new_customer:
         return "Dados inconsistentes para cadastro", 400
     
@@ -87,11 +114,17 @@ def create_customers():
     else:
         is_active = False
 
+    customer_email = is_valid_email(new_customer['email'])
+    customer_phone = format_phone(new_customer['phone'])
+    customer_cpf = format_cpf(new_customer['cpf'])
+
+
     data = {
         "id": len(CUSTOMERS) + 1,
         "name": new_customer['name'],
-        "phone": new_customer['phone'],
-        "email": new_customer['email'],
+        "cpf": customer_cpf,
+        "phone": customer_phone,
+        "email": customer_email,
         "address": new_customer['address'],
         "notes": new_customer['notes'],
         "is_active": is_active
@@ -112,9 +145,12 @@ def update_customers(id_customer):
 
     form = request.form.to_dict()
 
+    updated_email = is_valid_email(form.get('email'))
+    updated_phone = format_phone(form.get('phone'))
+
     customer['name'] = form.get('name')
-    customer['phone'] = form.get('phone')
-    customer['email'] = form.get('email')
+    customer['phone'] = updated_phone
+    customer['email'] = updated_email
     customer['address'] = form.get('address')
     customer['notes'] = form.get('notes')
     customer['is_active'] = form.get('is_active') == "true"
@@ -138,3 +174,4 @@ def delete_customers(id_customer):
     CUSTOMERS.remove(customer)
 
     return redirect(url_for('customers.list_all_customers'))
+

@@ -6,6 +6,7 @@ from flask import (
     url_for
 )
 from src.database.in_memory.db_in_memory import USERS
+from src.service.format_data import is_valid_email
 
 
 users_bp = Blueprint('users', __name__)
@@ -23,6 +24,29 @@ users_bp = Blueprint('users', __name__)
 def list_all_users():
 
     return render_template("users.html", USERS=USERS)
+
+
+
+@users_bp.route('/user')
+def list_one_user():
+    
+    search = request.args.get("search", "").strip()
+
+    search_lower = search.lower()
+
+    users_found = [
+        user
+        for user in USERS
+        if (
+            search_lower in user["name"].lower()
+            or search_lower in user["email"].lower()
+        )
+    ]
+
+    return render_template(
+        "users.html",
+        USERS=users_found
+    )
 
 
 
@@ -79,10 +103,15 @@ def create_users():
     else:
         is_active = False
 
+    email = is_valid_email(new_user['email'])
+
+    if not email == False:
+        return "Email inválido", 400
+
     data = {
         "id": len(USERS) + 1,
         "name": new_user['name'],
-        "email": new_user['email'],
+        "email": email,
         "password_hash": new_user['password'],
         "role": new_user['role'],
         "is_active": is_active

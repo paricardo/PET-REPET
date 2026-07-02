@@ -19,7 +19,7 @@
     </div>
 
     <div>
-        <form>
+        <form method="get" action="{{ url_for('users.list_one_user') }}">
 
             <div class="mb-3 mt-3">
                 <input class="input-search form-control"
@@ -79,42 +79,46 @@
 
 </main>
 
-    <!-- NAVBAR MOBILE -->
-    <nav class="bg-light navbar d-block d-md-none fixed-bottom bg-body-tertiary border-top">
+    <!-- NAVBAR MOBILE E DESKTOP -->
+    <nav class="bg-light navbar fixed-bottom bg-body-tertiary border-top">
         <div class="container-fluid">
-            
+
             <span class="d-flex flex-column align-items-center">
                 <img src="../static/icons/home.svg" alt="home">
                 <a class="text-nav navbar-brand m-0" href="#">Home</a>
             </span>
 
             <span class="d-flex flex-column align-items-center">
-                <img src="../static/icons/group.svg" alt="home">
+                <img src="../static/icons/group.svg" alt="clientes">
                 <a class="text-nav navbar-brand m-0" href="#">Clientes</a>
             </span>
 
             <span class="d-flex flex-column align-items-center">
-                <img src="../static/icons/calendar.svg" alt="home">
+                <img src="../static/icons/calendar.svg" alt="atendimentos">
                 <a class="text-nav navbar-brand m-0" href="#">Atendimentos</a>
             </span>
 
             <span class="d-flex flex-column align-items-center">
-                <img src="../static/icons/money.svg" alt="home">
+                <img src="../static/icons/money.svg" alt="financeiro">
                 <a class="text-nav navbar-brand m-0" href="#">Financeiro</a>
             </span>
 
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarScroll"
+                    aria-controls="navbarScroll"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
 
+            <div class="collapse navbar-collapse" id="navbarScroll">
                 <span class="d-flex align-items-center">
-                    <img src="../static/icons/person.svg" alt="home">
+                    <img src="../static/icons/person.svg" alt="usuários">
                     <a class="text-nav navbar-brand m-0 p-2 fs-5" href="#">Usuários</a>
                 </span>
-           
             </div>
+
         </div>
     </nav>
 

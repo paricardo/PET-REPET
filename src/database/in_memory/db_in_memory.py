@@ -19,6 +19,7 @@ CUSTOMERS = [
         "id": 1, 
         "name": "Carlos", 
         "phone": "(62) 9999-8888",
+        "cpf": "123.456.789-00",
         "email": "carlos@email.com", 
         "address": "Rua zacarias alves lima q.76 lt.12 jardim dom bosco",
         "notes": "teste de cliente",
